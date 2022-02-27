@@ -17,7 +17,7 @@ struct LandmarkList: View {
             List(model.landmarks) { landmark in
                 
                 NavigationLink {
-                    
+                    LandmarkDetail(landmark: landmark)
                 } label: {
                     LandmarkRow(landmark: landmark)
                 }
