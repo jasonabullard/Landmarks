@@ -22,9 +22,6 @@ struct LandmarkDetail: View {
         ScrollView(showsIndicators: false) {
             VStack {
                 
-//                MapView(landmark: landmark)
-//                    .frame(height: 300)
-                
                 MapView(landmark: landmark)
                     .frame(height: 300)
                 
