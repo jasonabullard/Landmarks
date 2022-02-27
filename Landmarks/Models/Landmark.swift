@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Landmark: Decodable, Identifiable {
     
@@ -15,6 +16,19 @@ struct Landmark: Decodable, Identifiable {
     var state: String
     var description: String
     var imageName: String
-    var coordinates: Coordinates
+    var isFavorite: Bool
+    private var coordinates: Coordinates
     
+    var locationCoordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude
+        )
+    }
+    
+    var annotationItem: AnnotationItem {
+        
+        return AnnotationItem(id: self.id, coordinate: locationCoordinate)
+        
+    }
 }

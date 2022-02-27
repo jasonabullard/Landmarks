@@ -11,17 +11,30 @@ struct LandmarkList: View {
     
     @EnvironmentObject private var model: ContentModel
     
+    @State private var showFavoritesOnly = false
+    private var filteredLandmarks: [Landmark] {
+        model.landmarks.filter {
+            !showFavoritesOnly || $0.isFavorite
+        }
+    }
+    
     var body: some View {
         
         NavigationView {
-            List(model.landmarks) { landmark in
+            List {
                 
-                NavigationLink {
-                    LandmarkDetail(landmark: landmark)
-                } label: {
-                    LandmarkRow(landmark: landmark)
+                Toggle(isOn: $showFavoritesOnly) {
+                    Text("Favorites only")
                 }
-                .buttonStyle(.plain)
+                
+                ForEach(filteredLandmarks) { landmark in
+                    NavigationLink {
+                        LandmarkDetail(landmark: landmark)
+                    } label: {
+                        LandmarkRow(landmark: landmark)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
             .listStyle(.plain)
             .navigationTitle("Landmarks")
