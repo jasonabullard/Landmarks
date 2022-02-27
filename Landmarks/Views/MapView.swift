@@ -22,7 +22,7 @@ struct MapView: View {
     var body: some View {
         
         Map(coordinateRegion: $region, interactionModes: .zoom, showsUserLocation: false, userTrackingMode: .none, annotationItems: annotations) { annotation in
-            MapPin(coordinate: annotation.coordinate, tint: .blue)
+            MapMarker(coordinate: annotation.coordinate, tint: .blue)
         }
         .onAppear {
             setAnnotation()
